@@ -7,8 +7,8 @@
     <div class="app-icon"></div>
     <div class="engine-info" v-if="!!engine">
       <h4>{{ $t('about.engine-version') }} {{engine.version}}</h4>
-      <h4>electron {{version_electron}}</h4>
-      <h4>chrome {{version_chrome}}</h4>
+      <h4>Electron {{version_electron}}</h4>
+      <h4>Chrome {{version_chrome}}</h4>
       <ul v-if="!isMas()">
         <li
           v-for="(feature, index) in engine.enabledFeatures"
