@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.11.0",
-    "node-fetch": "^2.7.0",
+    "node-fetch": "^3.0.0",
     "standard": "^17.1.0",
     "ws": "^8.13.0"
   },
