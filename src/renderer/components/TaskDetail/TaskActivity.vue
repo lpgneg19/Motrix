@@ -33,11 +33,11 @@
     </el-form-item>
     <el-form-item>
       <div class="form-static-value">
-        <span>{{ task.completedLength | bytesToSize(2) }}</span>
-        <span v-if="task.totalLength > 0"> / {{ task.totalLength | bytesToSize(2) }}</span>
+        <span>{{ $filters.bytesToSize(task.completedLength, 2) }}</span>
+        <span v-if="task.totalLength > 0"> / {{ $filters.bytesToSize(task.totalLength, 2) }}</span>
         <span class="task-time-remaining" v-if="isActive && remaining > 0">
           {{
-            remaining | timeFormat({
+            $filters.timeFormat(remaining, {
               prefix: $t('task.remaining-prefix'),
               i18n: {
                 'gt1d': $t('app.gt1d'),
@@ -62,17 +62,17 @@
     </el-form-item>
     <el-form-item :label="`${$t('task.task-download-speed')}: `">
       <div class="form-static-value">
-        <span>{{ task.downloadSpeed | bytesToSize }}/s</span>
+        <span>{{ $filters.bytesToSize(task.downloadSpeed) }}/s</span>
       </div>
     </el-form-item>
     <el-form-item :label="`${$t('task.task-upload-speed')}: `" v-if="isBT">
       <div class="form-static-value">
-        <span>{{ task.uploadSpeed | bytesToSize }}/s</span>
+        <span>{{ $filters.bytesToSize(task.uploadSpeed) }}/s</span>
       </div>
     </el-form-item>
     <el-form-item :label="`${$t('task.task-upload-length')}: `" v-if="isBT">
       <div class="form-static-value">
-        <span>{{ task.uploadLength | bytesToSize }}</span>
+        <span>{{ $filters.bytesToSize(task.uploadLength) }}</span>
       </div>
     </el-form-item>
     <el-form-item :label="`${$t('task.task-ratio')}: `" v-if="isBT">
@@ -176,10 +176,7 @@
         return ratio
       }
     },
-    filters: {
-      bytesToSize,
-      timeFormat
-    },
+
     mounted () {
       setImmediate(() => {
         this.updateGraphicWidth()

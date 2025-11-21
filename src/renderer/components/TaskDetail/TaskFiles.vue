@@ -23,7 +23,7 @@
         <el-table-column
           :label="$t('task.file-extension')"
           width="80">
-          <template slot-scope="scope">{{ scope.row.extension | removeExtensionDot }}</template>
+          <template slot-scope="scope">{{ $filters.removeExtensionDot(scope.row.extension) }}</template>
         </el-table-column>
         <el-table-column
           v-if="mode === 'DETAIL'"
@@ -37,13 +37,13 @@
           :label="`✓`"
           align="right"
           width="85">
-          <template slot-scope="scope">{{ scope.row.completedLength | bytesToSize }}</template>
+          <template slot-scope="scope">{{ $filters.bytesToSize(scope.row.completedLength) }}</template>
         </el-table-column>
         <el-table-column
           :label="$t('task.file-size')"
           align="right"
           width="85">
-          <template slot-scope="scope">{{ scope.row.length | bytesToSize }}</template>
+          <template slot-scope="scope">{{ $filters.bytesToSize(scope.row.length) }}</template>
         </el-table-column>
       </el-table>
     </div>
@@ -105,10 +105,7 @@
 
   export default {
     name: 'mo-task-files',
-    filters: {
-      bytesToSize,
-      removeExtensionDot
-    },
+
     props: {
       mode: {
         type: String,

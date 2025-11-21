@@ -1,7 +1,7 @@
 import { access, constants } from 'node:fs'
 import { resolve } from 'node:path'
 import { shell, nativeTheme } from '@electron/remote'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 
 import {
   getFileNameFromFile,
@@ -18,7 +18,7 @@ export const showItemInFolder = (fullPath, { errorMsg }) => {
   access(fullPath, constants.F_OK, (err) => {
     console.warn(`[Motrix] ${fullPath} ${err ? 'does not exist' : 'exists'}`)
     if (err && errorMsg) {
-      Message.error(errorMsg)
+      ElMessage.error(errorMsg)
       return
     }
 

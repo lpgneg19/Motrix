@@ -111,15 +111,17 @@
           :label-width="formLabelWidth"
         >
           <el-input placeholder="" v-model="form.dir" :readonly="isMas">
-            <mo-history-directory
-              slot="prepend"
-              @selected="handleHistoryDirectorySelected"
-            />
-            <mo-select-directory
-              v-if="isRenderer"
-              slot="append"
-              @selected="handleNativeDirectorySelected"
-            />
+            <template #prepend>
+              <mo-history-directory
+                @selected="handleHistoryDirectorySelected"
+              />
+            </template>
+            <template #append>
+              <mo-select-directory
+                v-if="isRenderer"
+                @selected="handleNativeDirectorySelected"
+              />
+            </template>
           </el-input>
           <div class="el-form-item__info" v-if="isMas" style="margin-top: 8px;">
             {{ $t('preferences.mas-default-dir-tips') }}

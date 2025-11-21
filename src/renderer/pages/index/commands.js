@@ -1,4 +1,4 @@
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import { base64StringToBlob } from 'blob-util'
 
 import router from '@/router'
@@ -68,7 +68,7 @@ const addTaskSilent = (type) => {
   try {
     addTaskByType(type)
   } catch (err) {
-    Message.error(i18n.t(err.message))
+    ElMessage.error(i18n.t(err.message))
   }
 }
 
@@ -79,15 +79,15 @@ const addTaskByType = (type) => {
   if (type === ADD_TASK_TYPE.URI) {
     payload = buildUriPayload(form)
     store.dispatch('task/addUri', payload).catch(err => {
-      Message.error(err.message)
+      ElMessage.error(err.message)
     })
   } else if (type === ADD_TASK_TYPE.TORRENT) {
     payload = buildTorrentPayload(form)
     store.dispatch('task/addTorrent', payload).catch(err => {
-      Message.error(err.message)
+      ElMessage.error(err.message)
     })
   } else if (type === 'metalink') {
-  // @TODO addMetalink
+    // @TODO addMetalink
   } else {
     console.error('addTask fail', form)
   }
@@ -128,7 +128,7 @@ const navigatePreferences = () => {
 }
 
 const showUnderDevelopmentMessage = () => {
-  Message.info(i18n.t('app.under-development-message'))
+  ElMessage.info(i18n.t('app.under-development-message'))
 }
 
 const pauseTask = () => {

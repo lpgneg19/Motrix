@@ -70,15 +70,17 @@
           v-model="form.dir"
           :readonly="isMas"
         >
-          <mo-history-directory
-            slot="prepend"
-            @selected="handleHistoryDirectorySelected"
-          />
-          <mo-select-directory
-            v-if="isRenderer"
-            slot="append"
-            @selected="handleNativeDirectorySelected"
-          />
+          <template #prepend>
+            <mo-history-directory
+              @selected="handleHistoryDirectorySelected"
+            />
+          </template>
+          <template #append>
+            <mo-select-directory
+              v-if="isRenderer"
+              @selected="handleNativeDirectorySelected"
+            />
+          </template>
         </el-input>
       </el-form-item>
       <div class="task-advanced-options" v-if="showAdvanced">
@@ -162,34 +164,37 @@
         </el-form-item>
       </div>
     </el-form>
-    <button
-      slot="title"
-      type="button"
-      class="el-dialog__headerbtn"
-      aria-label="Close"
-      @click="handleClose">
-      <i class="el-dialog__close el-icon el-icon-close"></i>
-    </button>
-    <div slot="footer" class="dialog-footer">
-      <el-row>
-        <el-col :span="9" :xs="9">
-          <el-checkbox class="chk" v-model="showAdvanced">
-            {{$t('task.show-advanced-options')}}
-          </el-checkbox>
-        </el-col>
-        <el-col :span="15" :xs="15">
-          <el-button @click="handleCancel('taskForm')">
-            {{$t('app.cancel')}}
-          </el-button>
-          <el-button
-            type="primary"
-            @click="submitForm('taskForm')"
-          >
-            {{$t('app.submit')}}
-          </el-button>
-        </el-col>
-      </el-row>
-    </div>
+    <template #header>
+      <button
+        type="button"
+        class="el-dialog__headerbtn"
+        aria-label="Close"
+        @click="handleClose">
+        <i class="el-dialog__close el-icon el-icon-close"></i>
+      </button>
+    </template>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-row>
+          <el-col :span="9" :xs="9">
+            <el-checkbox class="chk" v-model="showAdvanced">
+              {{$t('task.show-advanced-options')}}
+            </el-checkbox>
+          </el-col>
+          <el-col :span="15" :xs="15">
+            <el-button @click="handleCancel('taskForm')">
+              {{$t('app.cancel')}}
+            </el-button>
+            <el-button
+              type="primary"
+              @click="submitForm('taskForm')"
+            >
+              {{$t('app.submit')}}
+            </el-button>
+          </el-col>
+        </el-row>
+      </div>
+    </template>
   </el-dialog>
 </template>
 

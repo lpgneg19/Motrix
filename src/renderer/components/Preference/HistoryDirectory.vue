@@ -47,12 +47,13 @@
           </span>
         </li>
       </ul>
-      <el-button
-        slot="reference"
-        :disabled="popoverDisabled"
-      >
-        <i class="el-icon-time" />
-      </el-button>
+      <template #reference>
+        <el-button
+          :disabled="popoverDisabled"
+        >
+          <i class="el-icon-time" />
+        </el-button>
+      </template>
     </el-popover>
   </div>
 </template>

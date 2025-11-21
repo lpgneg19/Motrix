@@ -98,10 +98,7 @@
         selectedGidListCount: state => state.selectedGidList.length
       })
     },
-    filters: {
-      bytesToSize,
-      timeFormat
-    },
+
     methods: {
       refreshSpin () {
         this.t && clearTimeout(this.t)

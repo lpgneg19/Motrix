@@ -2,19 +2,19 @@ const queue = []
 const maxLength = 5
 
 export default {
-  install: function (Vue, Message, defaultOption = {}) {
-    Vue.prototype.$msg = new Proxy(Message, {
-      get (obj, prop) {
+  install: function (app, Message, defaultOption = {}) {
+    app.config.globalProperties.$msg = new Proxy(Message, {
+      get(obj, prop) {
         return (arg) => {
           if (!(arg instanceof Object)) {
             arg = { message: arg }
           }
           const task = {
-            run () {
+            run() {
               obj[prop]({
                 ...defaultOption,
                 ...arg,
-                onClose (...data) {
+                onClose(...data) {
                   const currentTask = queue.pop()
                   if (currentTask) {
                     currentTask.run()

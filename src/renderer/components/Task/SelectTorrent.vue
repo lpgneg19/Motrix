@@ -66,10 +66,7 @@
     components: {
       [TaskFiles.name]: TaskFiles
     },
-    filters: {
-      bytesToSize,
-      removeExtensionDot
-    },
+
     props: {
     },
     data () {

@@ -18,7 +18,7 @@
           :label="`${$t('task.task-peer-client')}: `"
           min-width="125">
           <template slot-scope="scope">
-            {{ scope.row.peerId | peerIdParser }}
+            {{ $filters.peerIdParser(scope.row.peerId) }}
           </template>
         </el-table-column>
         <el-table-column
@@ -26,7 +26,7 @@
           align="right"
           width="55">
           <template slot-scope="scope">
-            {{ scope.row.bitfield | bitfieldToPercent }}%
+            {{ $filters.bitfieldToPercent(scope.row.bitfield) }}%
           </template>
         </el-table-column>
         <el-table-column
@@ -34,7 +34,7 @@
           align="right"
           width="90">
           <template slot-scope="scope">
-            {{ scope.row.uploadSpeed | bytesToSize }}/s
+            {{ $filters.bytesToSize(scope.row.uploadSpeed) }}/s
           </template>
         </el-table-column>
         <el-table-column
@@ -42,7 +42,7 @@
           align="right"
           width="90">
           <template slot-scope="scope">
-            {{ scope.row.downloadSpeed | bytesToSize }}/s
+            {{ $filters.bytesToSize(scope.row.downloadSpeed) }}/s
           </template>
         </el-table-column>
       </el-table>
@@ -59,11 +59,7 @@
 
   export default {
     name: 'mo-task-peers',
-    filters: {
-      bitfieldToPercent,
-      bytesToSize,
-      peerIdParser
-    },
+
     props: {
       peers: {
         type: Array,

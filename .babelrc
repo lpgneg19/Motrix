@@ -2,32 +2,18 @@
   "comments": false,
   "env": {
     "main": {
-      "presets": ["@babel/preset-env"]
+      "presets": [
+        "@babel/preset-env"
+      ]
     },
     "renderer": {
       "presets": [
         "@babel/preset-env"
-      ],
-      "plugins": [
-        [
-          "component",
-          {
-            "libraryName": "element-ui",
-            "styleLibraryName": "theme-chalk"
-          }
-        ]
       ]
     },
     "web": {
-      "presets": ["@babel/preset-env"],
-      "plugins": [
-        [
-          "component",
-          {
-            "libraryName": "element-ui",
-            "styleLibraryName": "theme-chalk"
-          }
-        ]
+      "presets": [
+        "@babel/preset-env"
       ]
     }
   },

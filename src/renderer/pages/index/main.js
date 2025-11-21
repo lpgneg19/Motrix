@@ -1,12 +1,12 @@
 import is from 'electron-is'
 import { ipcRenderer } from 'electron'
-import Vue from 'vue'
-import VueI18Next from '@panter/vue-i18next'
-import { sync } from 'vuex-router-sync'
-import Element, { Loading, Message } from 'element-ui'
+import { createApp } from 'vue'
+import I18NextVue from 'i18next-vue'
+import ElementPlus, { ElLoading, ElMessage } from 'element-plus'
+import 'element-plus/dist/index.css'
 import axios from 'axios'
 
-import App from './App'
+import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import { getLocaleManager } from '@/components/Locale'
@@ -16,6 +16,14 @@ import { commands } from '@/components/CommandManager/instance'
 import TrayWorker from '@/workers/tray.worker'
 
 import '@/components/Theme/Index.scss'
+import {
+  bytesToSize,
+  bitfieldToPercent,
+  localeDateTimeFormat,
+  peerIdParser,
+  removeExtensionDot,
+  timeFormat
+} from '@shared/utils'
 
 const updateTray = is.renderer()
   ? async (payload) => {
@@ -27,73 +35,79 @@ const updateTray = is.renderer()
     const ab = await tray.arrayBuffer()
     ipcRenderer.send('command', 'application:update-tray', ab)
   }
-  : () => {}
+  : () => { }
 
-function initTrayWorker () {
+function initTrayWorker() {
   const worker = new TrayWorker()
 
   worker.addEventListener('message', (event) => {
     const { type, payload } = event.data
 
     switch (type) {
-    case 'initialized':
-    case 'log':
-      console.log('[Motrix] Log from Tray Worker: ', payload)
-      break
-    case 'tray:drawed':
-      updateTray(payload)
-      break
-    default:
-      console.warn('[Motrix] Tray Worker unhandled message type:', type, payload)
+      case 'initialized':
+      case 'log':
+        console.log('[Motrix] Log from Tray Worker: ', payload)
+        break
+      case 'tray:drawed':
+        updateTray(payload)
+        break
+      default:
+        console.warn('[Motrix] Tray Worker unhandled message type:', type, payload)
     }
   })
 
   return worker
 }
 
-function init (config) {
+function init(config) {
+  const app = createApp(App)
+
   if (is.renderer()) {
-    Vue.use(require('vue-electron'))
+    app.config.globalProperties.$electron = require('electron')
   }
 
-  Vue.http = Vue.prototype.$http = axios
-  Vue.config.productionTip = false
+  app.config.globalProperties.$http = axios
+  app.config.globalProperties.$filters = {
+    bytesToSize,
+    bitfieldToPercent,
+    localeDateTimeFormat,
+    peerIdParser,
+    removeExtensionDot,
+    timeFormat
+  }
+  app.config.productionTip = false
 
   const { locale } = config
   const localeManager = getLocaleManager()
   localeManager.changeLanguageByLocale(locale)
 
-  Vue.use(VueI18Next)
-  const i18n = new VueI18Next(localeManager.getI18n())
-  Vue.use(Element, {
-    size: 'mini',
-    i18n: (key, value) => i18n.t(key, value)
+  app.use(I18NextVue, { i18next: localeManager.getI18n() })
+
+  app.use(ElementPlus, {
+    size: 'small'
   })
-  Vue.use(Msg, Message, {
+
+  app.use(Msg, ElMessage, {
     showClose: true
   })
-  Vue.component('mo-icon', Icon)
 
-  const loading = Loading.service({
+  app.component('mo-icon', Icon)
+
+  const loading = ElLoading.service({
     fullscreen: true,
     background: 'rgba(0, 0, 0, 0.1)'
   })
 
-  sync(store, router)
+  app.use(store)
+  app.use(router)
 
-  /* eslint-disable no-new */
-  global.app = new Vue({
-    components: { App },
-    router,
-    store,
-    i18n,
-    template: '<App/>'
-  }).$mount('#app')
+  const vm = app.mount('#app')
 
-  global.app.commands = commands
+  // Attach commands to the root component instance
+  vm.commands = commands
   require('./commands')
 
-  global.app.trayWorker = initTrayWorker()
+  vm.trayWorker = initTrayWorker()
 
   setTimeout(() => {
     loading.close()

@@ -11,7 +11,7 @@
 <script>
   import is from 'electron-is'
   import { webContents } from '@electron/remote'
-  import { Loading } from 'element-ui'
+  import { ElLoading } from 'element-plus'
 
   export default {
     name: 'mo-browser',
@@ -41,7 +41,7 @@
     methods: {
       loadStart () {
         const { webviewViewport } = this.$refs
-        this.loading = Loading.service({
+        this.loading = ElLoading.service({
           target: webviewViewport
         })
       },
