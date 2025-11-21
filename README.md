@@ -42,6 +42,32 @@ Download from [GitHub Releases](https://github.com/agalwood/Motrix/releases) and
 - 🌍 I18n, [View supported languages](#-internationalization).
 - 🛠 More features in development
 
+## 🧭 Safari Extension (macOS)
+
+Motrix for macOS comes with a bundled Safari Extension that allows you to download files directly with Motrix.
+
+### How to Enable
+
+1.  Launch **Motrix**.
+2.  Open **Safari**.
+3.  Go to **Safari** > **Settings...** (or **Preferences...**) > **Extensions**.
+4.  Find **Motrix Extension** in the list and check the box to enable it.
+5.  (Optional) Click **Always Allow on Every Website** to ensure seamless integration.
+
+### Note for Unsigned Builds
+
+If you are using a version of Motrix that is not signed with an Apple Developer Certificate (e.g., a self-built version), you need to enable "Allow Unsigned Extensions" in Safari:
+
+1.  Open **Safari** > **Settings...** > **Advanced**.
+2.  Check **Show features for web developers**.
+3.  In the menu bar, click **Develop** and check **Allow Unsigned Extensions**.
+4.  Enter your system password if prompted.
+5.  Restart Safari and try enabling the extension again.
+
+### Usage
+
+Right-click on any link in Safari and select **Download with Motrix**. The download task will be automatically sent to Motrix.
+
 ## 🖥 User Interface
 
 ![motrix-screenshot-task-en.png](https://cdn.nlark.com/yuque/0/2020/png/129147/1589782238501-e7b39166-da58-4152-ae34-65a061cafa48.png)
