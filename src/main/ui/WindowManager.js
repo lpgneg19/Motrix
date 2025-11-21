@@ -22,7 +22,7 @@ const baseBrowserOptions = {
 const defaultBrowserOptions = is.macOS()
   ? {
     ...baseBrowserOptions,
-    vibrancy: 'ultra-dark',
+    vibrancy: 'fullscreen-ui',
     visualEffectState: 'active',
     backgroundColor: '#00000000'
   }
