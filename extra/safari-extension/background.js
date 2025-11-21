@@ -2,6 +2,7 @@ const RPC_URL_KEY = 'rpcUrl';
 const RPC_SECRET_KEY = 'rpcSecret';
 const DEFAULT_RPC_URL = 'http://127.0.0.1:16800/jsonrpc';
 
+chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: 'download-with-motrix',
         title: 'Download with Motrix',
