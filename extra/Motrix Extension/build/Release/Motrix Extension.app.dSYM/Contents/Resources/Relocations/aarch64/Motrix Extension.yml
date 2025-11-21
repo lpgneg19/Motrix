@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/steve/Documents/GitHub/Motrix/extra/Motrix Extension/build/Release/Motrix Extension.app/Contents/MacOS/Motrix Extension'
+relocations:     []
+...

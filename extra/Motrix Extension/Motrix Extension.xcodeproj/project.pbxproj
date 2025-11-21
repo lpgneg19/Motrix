@@ -524,7 +524,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.motrix.Motrix-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.motrix.safari-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -565,7 +565,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.motrix.Motrix-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.motrix.safari-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
