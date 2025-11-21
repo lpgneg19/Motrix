@@ -97,7 +97,7 @@
     "parse-torrent": "^11.0.19",
     "postcss": "^8.5.6",
     "randomatic": "^3.1.1",
-    "sass": "1.77.2",
+    "sass": "1.94.2",
     "sass-loader": "^14.0.0",
     "style-loader": "^3.3.2",
     "tailwindcss": "^3.4.3",
