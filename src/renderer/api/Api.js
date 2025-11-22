@@ -70,9 +70,13 @@ export default class Api {
   }
 
   fetchPreference () {
-    return new Promise((resolve) => {
-      this.config = this.loadConfig()
-      resolve(this.config)
+    return new Promise((resolve, reject) => {
+      this.loadConfig().then((config) => {
+        this.config = config
+        resolve(this.config)
+      }).catch(err => {
+        reject(err)
+      })
     })
   }
 

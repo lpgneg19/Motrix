@@ -4,17 +4,17 @@ const maxLength = 5
 export default {
   install: function (app, Message, defaultOption = {}) {
     app.config.globalProperties.$msg = new Proxy(Message, {
-      get(obj, prop) {
+      get (obj, prop) {
         return (arg) => {
           if (!(arg instanceof Object)) {
             arg = { message: arg }
           }
           const task = {
-            run() {
+            run () {
               obj[prop]({
                 ...defaultOption,
                 ...arg,
-                onClose(...data) {
+                onClose (...data) {
                   const currentTask = queue.pop()
                   if (currentTask) {
                     currentTask.run()

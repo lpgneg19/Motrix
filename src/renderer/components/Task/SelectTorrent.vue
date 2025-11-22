@@ -56,9 +56,7 @@
   import {
     buildFileList,
     listTorrentFiles,
-    bytesToSize,
-    getAsBase64,
-    removeExtensionDot
+    getAsBase64
   } from '@shared/utils'
 
   export default {

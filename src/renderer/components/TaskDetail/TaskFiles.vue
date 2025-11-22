@@ -18,32 +18,32 @@
           :label="$t('task.file-name')"
           min-width="200"
           show-overflow-tooltip>
-          <template slot-scope="scope">{{ scope.row.name }}</template>
+          <template #default="scope">{{ scope.row.name }}</template>
         </el-table-column>
         <el-table-column
           :label="$t('task.file-extension')"
           width="80">
-          <template slot-scope="scope">{{ $filters.removeExtensionDot(scope.row.extension) }}</template>
+          <template #default="scope">{{ $filters.removeExtensionDot(scope.row.extension) }}</template>
         </el-table-column>
         <el-table-column
           v-if="mode === 'DETAIL'"
           :label="`%`"
           align="right"
           width="50">
-          <template slot-scope="scope">{{ calcProgress(scope.row.length, scope.row.completedLength, 1) }}</template>
+          <template #default="scope">{{ calcProgress(scope.row.length, scope.row.completedLength, 1) }}</template>
         </el-table-column>
         <el-table-column
           v-if="mode === 'DETAIL'"
           :label="`✓`"
           align="right"
           width="85">
-          <template slot-scope="scope">{{ $filters.bytesToSize(scope.row.completedLength) }}</template>
+          <template #default="scope">{{ $filters.bytesToSize(scope.row.completedLength) }}</template>
         </el-table-column>
         <el-table-column
           :label="$t('task.file-size')"
           align="right"
           width="85">
-          <template slot-scope="scope">{{ $filters.bytesToSize(scope.row.length) }}</template>
+          <template #default="scope">{{ $filters.bytesToSize(scope.row.length) }}</template>
         </el-table-column>
       </el-table>
     </div>
@@ -99,8 +99,7 @@
     filterAudioFiles,
     filterDocumentFiles,
     filterImageFiles,
-    filterVideoFiles,
-    removeExtensionDot
+    filterVideoFiles
   } from '@shared/utils'
 
   export default {

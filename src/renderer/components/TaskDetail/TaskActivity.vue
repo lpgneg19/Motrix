@@ -86,13 +86,11 @@
 <script>
   import is from 'electron-is'
   import {
-    bytesToSize,
     calcFormLabelWidth,
     calcProgress,
     calcRatio,
     checkTaskIsBT,
     checkTaskIsSeeder,
-    timeFormat,
     timeRemaining
   } from '@shared/utils'
   import { TASK_STATUS } from '@shared/constants'

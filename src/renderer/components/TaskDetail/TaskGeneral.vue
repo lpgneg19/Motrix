@@ -81,13 +81,11 @@
   import is from 'electron-is'
   import { mapState } from 'vuex'
   import {
-    bytesToSize,
     calcFormLabelWidth,
     checkTaskIsBT,
     checkTaskIsSeeder,
     getTaskName,
-    getTaskUri,
-    localeDateTimeFormat
+    getTaskUri
   } from '@shared/utils'
   import { APP_THEME, TASK_STATUS } from '@shared/constants'
   import { getTaskFullPath } from '@/utils/native'

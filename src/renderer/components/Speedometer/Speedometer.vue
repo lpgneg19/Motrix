@@ -18,7 +18,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import { bytesToSize } from '@shared/utils'
+
   import '@/components/Icons/speedometer'
 
   export default {

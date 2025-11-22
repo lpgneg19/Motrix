@@ -190,7 +190,7 @@
     mounted () {
       window.addEventListener('resize', this.handleAppResize)
     },
-    destroyed () {
+    unmounted () {
       window.removeEventListener('resize', this.handleAppResize)
       cached.files = []
     },

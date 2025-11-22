@@ -59,10 +59,8 @@
 
 <script>
   import {
-    bytesToSize,
     checkTaskIsBT,
     checkTaskIsSeeder,
-    timeFormat,
     timeRemaining
   } from '@shared/utils'
   import { TASK_STATUS } from '@shared/constants'
@@ -92,7 +90,7 @@
         const { totalLength, completedLength, downloadSpeed } = this.task
         return timeRemaining(totalLength, completedLength, downloadSpeed)
       }
-    },
+    }
 
   }
 </script>

@@ -50,7 +50,7 @@ let rendererConfig = {
               implementation: require('sass'),
               additionalData: '@import "@/components/Theme/Variables.scss";',
               sassOptions: {
-                includePaths:[__dirname, 'src']
+                includePaths: [__dirname, 'src']
               }
             },
           }
@@ -68,7 +68,7 @@ let rendererConfig = {
               indentedSyntax: true,
               additionalData: '@import "@/components/Theme/Variables.scss";',
               sassOptions: {
-                includePaths:[__dirname, 'src']
+                includePaths: [__dirname, 'src']
               }
             },
           }
@@ -165,7 +165,7 @@ let rendererConfig = {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
       '@shared': path.join(__dirname, '../src/shared'),
-      'vue$': 'vue/dist/vue.esm-bundler.js'
+      'vue$': 'vue/dist/vue.cjs.js'
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node']
   },
@@ -203,7 +203,7 @@ if (!devMode) {
       patterns: [{
         from: path.join(__dirname, '../static'),
         to: path.join(__dirname, '../dist/electron/static'),
-        globOptions: { ignore: [ '.*' ] }
+        globOptions: { ignore: ['.*'] }
       }]
     }),
     new Webpack.DefinePlugin({

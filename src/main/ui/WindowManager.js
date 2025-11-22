@@ -1,3 +1,4 @@
+/* eslint-disable space-before-function-paren */
 import { join } from 'node:path'
 import { EventEmitter } from 'node:events'
 import { debounce } from 'lodash'
@@ -31,7 +32,7 @@ const defaultBrowserOptions = is.macOS()
   }
 
 export default class WindowManager extends EventEmitter {
-  constructor (options = {}) {
+  constructor(options = {}) {
     super()
     this.userConfig = options.userConfig || {}
 
@@ -44,11 +45,11 @@ export default class WindowManager extends EventEmitter {
     this.handleAllWindowClosed()
   }
 
-  setWillQuit (flag) {
+  setWillQuit(flag) {
     this.willQuit = flag
   }
 
-  getPageOptions (page) {
+  getPageOptions(page) {
     const result = pageConfig[page] || {}
     const hideAppMenu = this.userConfig['hide-app-menu']
     if (hideAppMenu) {
@@ -71,7 +72,7 @@ export default class WindowManager extends EventEmitter {
     return result
   }
 
-  getPageBounds (page) {
+  getPageBounds(page) {
     const enabled = this.userConfig['keep-window-state']
     const windowStateMap = this.userConfig['window-state'] || {}
     let result = null
@@ -82,7 +83,7 @@ export default class WindowManager extends EventEmitter {
     return result
   }
 
-  openWindow (page, options = {}) {
+  openWindow(page, options = {}) {
     const pageOptions = this.getPageOptions(page)
     const { hidden } = options
     const autoHideWindow = this.userConfig['auto-hide-window']
@@ -100,7 +101,8 @@ export default class WindowManager extends EventEmitter {
         enableRemoteModule: true,
         contextIsolation: false,
         nodeIntegration: true,
-        nodeIntegrationInWorker: true
+        nodeIntegrationInWorker: true,
+        sandbox: false
       }
     })
 
@@ -150,23 +152,23 @@ export default class WindowManager extends EventEmitter {
     return window
   }
 
-  getWindow (page) {
+  getWindow(page) {
     return this.windows[page]
   }
 
-  getWindows () {
+  getWindows() {
     return this.windows || {}
   }
 
-  getWindowList () {
+  getWindowList() {
     return Object.values(this.getWindows())
   }
 
-  addWindow (page, window) {
+  addWindow(page, window) {
     this.windows[page] = window
   }
 
-  destroyWindow (page) {
+  destroyWindow(page) {
     const win = this.getWindow(page)
     if (!win) {
       return
@@ -179,17 +181,17 @@ export default class WindowManager extends EventEmitter {
     win.destroy()
   }
 
-  removeWindow (page) {
+  removeWindow(page) {
     this.windows[page] = null
   }
 
-  bindAfterClosed (page, window) {
+  bindAfterClosed(page, window) {
     window.on('closed', (event) => {
       this.removeWindow(page)
     })
   }
 
-  handleWindowState (page, window) {
+  handleWindowState(page, window) {
     window.on('resize', debounce(() => {
       const bounds = window.getBounds()
       this.emit('window-resized', { page, bounds })
@@ -201,7 +203,7 @@ export default class WindowManager extends EventEmitter {
     }, 500))
   }
 
-  handleWindowClose (pageOptions, page, window) {
+  handleWindowClose(pageOptions, page, window) {
     window.on('close', (event) => {
       if (pageOptions.bindCloseToHide && !this.willQuit) {
         event.preventDefault()
@@ -220,7 +222,7 @@ export default class WindowManager extends EventEmitter {
     })
   }
 
-  showWindow (page) {
+  showWindow(page) {
     const window = this.getWindow(page)
     if (!window || (window.isVisible() && !window.isMinimized())) {
       return
@@ -229,7 +231,7 @@ export default class WindowManager extends EventEmitter {
     window.show()
   }
 
-  hideWindow (page) {
+  hideWindow(page) {
     const window = this.getWindow(page)
     if (!window || !window.isVisible()) {
       return
@@ -237,13 +239,13 @@ export default class WindowManager extends EventEmitter {
     window.hide()
   }
 
-  hideAllWindow () {
+  hideAllWindow() {
     this.getWindowList().forEach((window) => {
       window.hide()
     })
   }
 
-  toggleWindow (page) {
+  toggleWindow(page) {
     const window = this.getWindow(page)
     if (!window) {
       return
@@ -256,35 +258,35 @@ export default class WindowManager extends EventEmitter {
     }
   }
 
-  getFocusedWindow () {
+  getFocusedWindow() {
     return BrowserWindow.getFocusedWindow()
   }
 
-  handleBeforeQuit () {
+  handleBeforeQuit() {
     app.on('before-quit', () => {
       this.setWillQuit(true)
     })
   }
 
-  onWindowBlur (event, window) {
+  onWindowBlur(event, window) {
     window.hide()
   }
 
-  handleWindowBlur () {
+  handleWindowBlur() {
     app.on('browser-window-blur', this.onWindowBlur)
   }
 
-  unbindWindowBlur () {
+  unbindWindowBlur() {
     app.removeListener('browser-window-blur', this.onWindowBlur)
   }
 
-  handleAllWindowClosed () {
+  handleAllWindowClosed() {
     app.on('window-all-closed', (event) => {
       event.preventDefault()
     })
   }
 
-  sendCommandTo (window, command, ...args) {
+  sendCommandTo(window, command, ...args) {
     if (!window) {
       return
     }
@@ -292,7 +294,7 @@ export default class WindowManager extends EventEmitter {
     window.webContents.send('command', command, ...args)
   }
 
-  sendMessageTo (window, channel, ...args) {
+  sendMessageTo(window, channel, ...args) {
     if (!window) {
       return
     }
