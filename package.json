@@ -56,7 +56,7 @@
     "@motrix/multispinner": "^0.2.4",
     "@motrix/nat-api": "^0.3.4",
     "@panter/vue-i18next": "^0.15.2",
-    "@vue/eslint-config-standard": "^8.0.1",
+    "@vue/eslint-config-standard": "^9.0.0",
     "ajv": "^8.12.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.13.2",
